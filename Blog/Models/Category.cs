@@ -1,4 +1,6 @@
-﻿namespace Blog.API.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Blog.API.Models
 {
     public class Category
     {
@@ -7,8 +9,10 @@
         public string Slug { get; private set; }
 
 
+        [JsonConstructor]
         public Category(string name, string slug)
         {
+
             Name = name;
             Slug = slug;
         }

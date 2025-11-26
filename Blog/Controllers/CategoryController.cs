@@ -32,12 +32,14 @@ namespace Blog.API.Controllers
             return Ok(categories);
         }
 
-        
         [HttpPost("Create")]
-        public ActionResult CreateCategory(Category category)
+        public async Task<ActionResult> CreateCategory(Category category)
         {
+            await _categoryService.CreateCategoryAsync(category);
 
-            return Ok();
+            return Created();
         }
+
+
     }
 }

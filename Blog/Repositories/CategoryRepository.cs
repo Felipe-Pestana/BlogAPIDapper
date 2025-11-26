@@ -17,24 +17,15 @@ namespace Blog.API.Repositories
         public async Task<List<Category>> GetAllCategoriesAsync()
         {
             var sql = "SELECT * FROM Category";
-            var categories = new List<Category>();
 
-            using (_connection)
-            {
-                await _connection.OpenAsync();
-                
-                var reader = await _connection.ExecuteReaderAsync(sql);
+            return (await _connection.QueryAsync<Category>(sql)).ToList();
+        }
 
-                while (reader.Read())
-                {
-                    var category = new Category(
-                        reader["Name"].ToString(),
-                        reader["Slug"].ToString()
-                    );
-                    categories.Add(category);
-                }
-                return categories;
-            }
+        public async Task CreateCategoryAsync(Category category)
+        {
+            var sql = "INSERT INTO Category (Name, Slug) VALUES (@Name, @Slug)";
+
+            await _connection.ExecuteAsync(sql, new { category.Name, category.Slug });
         }
     }
 }

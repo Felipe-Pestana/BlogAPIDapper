@@ -16,5 +16,10 @@ namespace Blog.API.Services
         {
             return await _categoryRepository.GetAllCategoriesAsync();
         }
+
+        public async Task CreateCategoryAsync(Category category)
+        {
+            await _categoryRepository.CreateCategoryAsync(category);
+        }
     }
 }
