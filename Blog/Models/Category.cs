@@ -8,8 +8,6 @@ namespace Blog.API.Models
         public string Name { get; private set; }
         public string Slug { get; private set; }
 
-
-        [JsonConstructor]
         public Category(string name, string slug)
         {
 

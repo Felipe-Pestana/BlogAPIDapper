@@ -1,4 +1,5 @@
 ﻿using Blog.API.Models;
+using Blog.API.Models.DTOs;
 using Blog.API.Repositories;
 
 namespace Blog.API.Services
@@ -12,14 +13,17 @@ namespace Blog.API.Services
             _categoryRepository = categoryrepository;
         }
 
-        public async Task<List<Category>> GetAllCategoriesAsync()
+        public async Task<List<CategoryResponseDTO>> GetAllCategoriesAsync()
         {
             return await _categoryRepository.GetAllCategoriesAsync();
         }
 
-        public async Task CreateCategoryAsync(Category category)
+        public async Task CreateCategoryAsync(CategoryRequestDTO category)
         {
-            await _categoryRepository.CreateCategoryAsync(category);
+            var newCategory = new Category ( category.Name, 
+                                             category.Name.ToLower().Replace(" ", "-") );
+
+            await _categoryRepository.CreateCategoryAsync(newCategory);
         }
     }
 }

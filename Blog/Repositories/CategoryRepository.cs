@@ -1,11 +1,13 @@
 ﻿using Blog.API.Data;
 using Blog.API.Models;
+using Blog.API.Models.DTOs;
+using Blog.API.Repositories.Intertfaces;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
 namespace Blog.API.Repositories
 {
-    public class CategoryRepository
+    public class CategoryRepository : ICategoryRespository
     {
         private readonly SqlConnection _connection;
 
@@ -14,11 +16,11 @@ namespace Blog.API.Repositories
             _connection = connection.GetConnection();
         }
 
-        public async Task<List<Category>> GetAllCategoriesAsync()
+        public async Task<List<CategoryResponseDTO>> GetAllCategoriesAsync()
         {
-            var sql = "SELECT * FROM Category";
+            var sql = "SELECT Name, Slug FROM Category";
 
-            return (await _connection.QueryAsync<Category>(sql)).ToList();
+            return (await _connection.QueryAsync<CategoryResponseDTO>(sql)).ToList();
         }
 
         public async Task CreateCategoryAsync(Category category)

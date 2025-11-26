@@ -1,5 +1,6 @@
 ﻿using Blog.API.Data;
 using Blog.API.Models;
+using Blog.API.Models.DTOs;
 using Blog.API.Services;
 using Dapper;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +26,7 @@ namespace Blog.API.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<Category>>> GetAllCategoriesAsync()
+        public async Task<ActionResult<List<CategoryResponseDTO>>> GetAllCategoriesAsync()
         {
             var categories = await _categoryService.GetAllCategoriesAsync();
 
@@ -33,7 +34,7 @@ namespace Blog.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult> CreateCategory(Category category)
+        public async Task<ActionResult> CreateCategory(CategoryRequestDTO category)
         {
             await _categoryService.CreateCategoryAsync(category);
 
