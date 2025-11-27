@@ -59,6 +59,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CREATE_SCHEMA.sql" />
-    <None Include="Script1.sql" />
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 ﻿using Blog.API.Data;
 using Blog.API.Repositories;
 using Blog.API.Services;
-using Blog.API.Controllers;
-using Blog.API.Controllers.Interfaces;
+
+using Blog.API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +13,12 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<ConnectionDB>();
 
 builder.Services.AddSingleton<CategoryRepository>();
-builder.Services.AddSingleton<TagService>();
+builder.Services.AddSingleton<RoleRepository>();
+builder.Services.AddSingleton<TagRepository>();
+
+builder.Services.AddSingleton<ITagService, TagService>();
+builder.Services.AddSingleton<IRoleService, RoleService>();
+builder.Services.AddSingleton<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
