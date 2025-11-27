@@ -19,7 +19,7 @@ namespace Blog.API.Services
         {
             try
             {
-                var newTag = new Tag(tag.Name, tag.Slug);
+                var newTag = new Tag(tag.Name, tag.Name.ToLower().Replace(" ","-"));
 
                 await _tagRepository.CreateTagAsync(newTag);
             }

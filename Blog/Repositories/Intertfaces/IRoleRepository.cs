@@ -5,7 +5,7 @@ namespace Blog.API.Repositories.Intertfaces
 {
     public interface IRoleRespository
     {
-        Task<List<RoleResponseDTO>> GetAllCategoriesAsync();
+        Task<List<RoleResponseDTO>> GetAllRolesAsync();
         Task CreateRoleAsync(Role role);
     }
 }

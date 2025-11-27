@@ -11,9 +11,12 @@ namespace Blog.API.Repositories
     {
         private readonly SqlConnection _connection;
 
-        public CategoryRepository(ConnectionDB connection)
+        private ILogger<CategoryRepository> _logger;
+
+        public CategoryRepository(ConnectionDB connection, ILogger<CategoryRepository> logger)
         {
             _connection = connection.GetConnection();
+            _logger = logger;
         }
 
         public async Task<List<CategoryResponseDTO>> GetAllCategoriesAsync()

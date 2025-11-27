@@ -10,9 +10,9 @@ namespace Blog.API.Controllers
     public class CategoryController : ControllerBase, ICategoryController
     {
         private CategoryService _categoryService;
-        private ILogger _logger;
+        private ILogger<CategoryController> _logger;
 
-        public CategoryController(CategoryService service, ILogger logger)
+        public CategoryController(CategoryService service, ILogger<CategoryController> logger)
         {
             _categoryService = service;
             _logger = logger;
@@ -33,7 +33,7 @@ namespace Blog.API.Controllers
                 var categories = await _categoryService.GetAllCategoriesAsync();
 
                 if (categories is null)
-                    return NotFound("No categories found.");
+                    return NoContent();
 
                 return Ok(categories);
             }
@@ -53,7 +53,7 @@ namespace Blog.API.Controllers
                 var category = await _categoryService.GetCategoryByIdAsync(id);
                 
                 if (category is null)
-                    return NotFound();
+                    return NotFound("Categoria não encontrada!");
 
                 return Ok(category);
             }

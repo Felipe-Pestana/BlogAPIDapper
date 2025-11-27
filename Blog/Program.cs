@@ -2,6 +2,7 @@
 using Blog.API.Repositories;
 using Blog.API.Services;
 using Blog.API.Controllers;
+using Blog.API.Controllers.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
