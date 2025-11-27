@@ -8,7 +8,7 @@ namespace Blog.API.Data
 
         public ConnectionDB(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
         }
 
         public SqlConnection GetConnection()

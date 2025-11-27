@@ -1,8 +1,9 @@
-﻿CREATE DATABASE [Blog]
-GO
+﻿IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'Blog')
+BEGIN
+    CREATE DATABASE Blog;
+END
 
 USE [Blog]
-GO
 
 CREATE TABLE [User] (
     [Id] INT NOT NULL IDENTITY(1, 1),
@@ -34,7 +35,9 @@ CREATE TABLE [UserRole] (
     [UserId] INT NOT NULL,
     [RoleId] INT NOT NULL,
 
-    CONSTRAINT [PK_UserRole] PRIMARY KEY([UserId], [RoleId])
+    CONSTRAINT [PK_UserRole] PRIMARY KEY([UserId], [RoleId]),
+    CONSTRAINT [FK_User_Id] FOREIGN KEY([UserId]) REFERENCES [User]([Id]),
+    CONSTRAINT [FK_Role_Id] FOREIGN KEY([RoleId]) REFERENCES [Role]([Id])
 )
 
 CREATE TABLE [Category] (
@@ -71,13 +74,16 @@ CREATE TABLE [Tag] (
     [Slug] VARCHAR(80) NOT NULL,
 
     CONSTRAINT [PK_Tag] PRIMARY KEY([Id]),
-    CONSTRAINT [UQ_Tag_Slug] UNIQUE([Slug])
+    CONSTRAINT [UQ_Tag_Slug] UNIQUE([Slug]),
 )
+
 CREATE NONCLUSTERED INDEX [IX_Tag_Slug] ON [Tag]([Slug])
 
 CREATE TABLE [PostTag] (
     [PostId] INT NOT NULL,
     [TagId] INT NOT NULL,
 
-    CONSTRAINT PK_PostTag PRIMARY KEY([PostId], [TagId])
+    CONSTRAINT PK_PostTag PRIMARY KEY([PostId], [TagId]),
+    CONSTRAINT [FK_Post_Id] FOREIGN KEY([PostId]) REFERENCES [Post]([Id]),
+    CONSTRAINT [FK_Tag_Id] FOREIGN KEY([TagId]) REFERENCES [Tag]([Id])
 )

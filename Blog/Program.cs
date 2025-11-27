@@ -1,6 +1,7 @@
-using Blog.API.Data;
+﻿using Blog.API.Data;
 using Blog.API.Repositories;
 using Blog.API.Services;
+using Blog.API.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<ConnectionDB>();
 
 builder.Services.AddSingleton<CategoryRepository>();
-builder.Services.AddSingleton<CategoryService>();
+builder.Services.AddSingleton<TagService>();
 
 var app = builder.Build();
 
